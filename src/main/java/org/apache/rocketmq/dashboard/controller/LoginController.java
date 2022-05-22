@@ -67,9 +67,9 @@ public class LoginController {
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     @ResponseBody
     public Object login(@RequestParam("username") String username,
-        @RequestParam(value = "password") String password,
-        HttpServletRequest request,
-        HttpServletResponse response) throws Exception {
+                        @RequestParam(value = "password") String password,
+                        HttpServletRequest request,
+                        HttpServletResponse response) throws Exception {
         logger.info("user:{} login", username);
         User user = userService.queryByUsernameAndPassword(username, password);
 
@@ -78,6 +78,7 @@ public class LoginController {
         } else {
             user.setPassword(null);
             UserInfo userInfo = WebUtil.setLoginInfo(request, response, user);
+            request.getSession().setMaxInactiveInterval(configure.getLoginExpire());
             WebUtil.setSessionValue(request, WebUtil.USER_INFO, userInfo);
             WebUtil.setSessionValue(request, WebUtil.USER_NAME, username);
             userInfo.setSessionId(WebUtil.getSessionId(request));

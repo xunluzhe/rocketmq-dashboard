@@ -60,6 +60,8 @@ public class RMQConfigure {
 
     private Long timeoutMillis;
 
+    private Integer loginExpire;
+
     private List<String> namesrvAddrs = new ArrayList<>();
 
     public String getAccessKey() {
@@ -158,6 +160,14 @@ public class RMQConfigure {
 
     public void setTimeoutMillis(Long timeoutMillis) {
         this.timeoutMillis = timeoutMillis;
+    }
+
+    public Integer getLoginExpire() {
+        return loginExpire;
+    }
+
+    public void setLoginExpire(Integer loginExpire) {
+        this.loginExpire = loginExpire;
     }
 
     // Error Page process logic, move to a central configure later
